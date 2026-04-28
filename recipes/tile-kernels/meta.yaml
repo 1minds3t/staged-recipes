@@ -1,0 +1,44 @@
+{% set version = "1.0.0" %}
+
+package:
+  name: tile-kernels
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/tile-kernels/tile_kernels-{{ version }}.tar.gz
+  sha256: 259b7d70219cce6afa868f724c3032936c6ae331239285b1111554c4baa46eb3
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.10
+    - pip
+    - setuptools >=61
+    - setuptools-scm >=8
+    - wheel
+  run:
+    - python >=3.10
+    - pytorch >=2.10
+    - tilelang >=0.1.9
+
+test:
+  imports:
+    - tile_kernels
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/deepseek-ai/TileKernels
+  summary: Tilelang-based high performance GPU kernels.
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - 1minds3t
