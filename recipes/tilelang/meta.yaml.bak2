@@ -11,10 +11,7 @@ source:
 build:
   skip: true  # [py<39 or win]
   number: 0
-  script:
-    - sed -i 's|PATHS ${Z3_PATH}/bin ${Z3_PATH}/lib ${Z3_PATH}/lib64|PATHS ${Z3_PATH}/bin ${Z3_PATH}/lib ${Z3_PATH}/lib64 $ENV{PREFIX}/lib $ENV{PREFIX}/lib64|' cmake/pypi-z3/FindZ3.cmake
-    - sed -i 's|PATHS ${Z3_PATH}/include|PATHS ${Z3_PATH}/include $ENV{PREFIX}/include|' cmake/pypi-z3/FindZ3.cmake
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -26,8 +23,6 @@ requirements:
     - cmake >=3.26.1
     - ninja
     - patchelf >=0.17.2  # [linux]
-    - libz3
-    - libz3
     - z3-solver >=4.13.0,<4.15.5
   run:
     - python >=3.11,<3.13
@@ -39,8 +34,6 @@ requirements:
     - pytorch >=2.4
     - tqdm >=4.62.3
     - typing_extensions >=4.10.0
-    - libz3
-    - libz3
     - z3-solver >=4.13.0,<4.15.5
     - setuptools  # [osx]
 
